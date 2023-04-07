@@ -357,7 +357,7 @@ mha_bwd(const at::Tensor &dout,  // total_q x num_heads, x head_size
 ) {
     auto dprops = at::cuda::getCurrentDeviceProperties();
     bool is_sm75 = dprops->major == 7 && dprops->minor == 5;
-    bool is_sm80 = dprops->major == 8 && dprops->minor == 0;
+    bool is_sm80 = dprops->major == 8 && dprops->minor >= 0; // 暫定処置です！許して！！
     bool is_sm8x = dprops->major == 8 && dprops->minor >= 0;
     bool is_sm90 = dprops->major == 9 && dprops->minor == 0;
     TORCH_CHECK(is_sm90 || is_sm8x || is_sm75);
